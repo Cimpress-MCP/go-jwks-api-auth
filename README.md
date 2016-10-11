@@ -1,12 +1,12 @@
 # go-jwks-api-auth
 
-This library provides a method to retrieve the public key from Auth0's endpoint that serves JWKS for JWT validation. The implementation was designed around [Auth0's API authentication](https://auth0.com/docs/api-auth/config/asking-for-access-tokens) design, although any API that serves JWKS on the `/.well-known/jwks.json` endpoint would work as well.
+This library provides a method to retrieve the public key from Auth0's endpoint that serves JWKS for JWT validation. It was designed around [Auth0's API authentication](https://auth0.com/docs/api-auth/config/asking-for-access-tokens) implementation, although any API that serves JWKS on the `/.well-known/jwks.json` endpoint would work as well.
 
 ## Usage
 
 This library is intended to be used with [`auth0/go-jwt-middleware`](https://github.com/auth0/go-jwt-middleware), more specifically in the `ValidationKeyGetter` callback.
 
-`GetPublicKey()` asks for a target `iss` and `aud` to perform verification against the token, which can be forged by malicious actors to request JWKS from their own endpoint and/or target an arbitrary resource server.
+`GetPublicKey()` asks for a target `iss` and `aud` to perform verification against the token, which could be forged by malicious actors to request JWKS from their own endpoint and/or target an arbitrary resource server.
 
 The following example performs validation via JWKS (asymmetric, RS256) as well as standard client secret (symmetric, HS256).
 
